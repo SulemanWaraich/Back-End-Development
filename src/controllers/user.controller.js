@@ -22,7 +22,7 @@ const registerUser = asyncHandler( async (req, res) => {
         throw new ApiError(400, "All fields are required")
     }
 
-    const existedUser = userModel.findOne({
+    const existedUser = await userModel.findOne({
         $or: [{userName}, {email}]
     })
 

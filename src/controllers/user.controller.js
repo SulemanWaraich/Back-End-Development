@@ -97,7 +97,9 @@ const loginUser = asyncHandler( async(req, res ) => {
 
     const {userName, email, password} = req.body
 
-    if(!userName || !email){
+    console.log(password);
+    
+    if(!(userName || email)){
         throw new ApiError(400, "username or email required");
     }
 
@@ -107,7 +109,12 @@ const loginUser = asyncHandler( async(req, res ) => {
         throw new ApiError(404, "User doesn't exist.");
     }
 
+    console.log(user.password);
+    
     const validPassword = await user.isPasswordCorrect(password);
+
+    console.log(validPassword);
+    
 
     if(!validPassword){
         throw new ApiError(401, "Wrong Password");
